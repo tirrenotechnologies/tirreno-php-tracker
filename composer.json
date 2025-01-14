@@ -1,0 +1,35 @@
+{
+    "name": "tirreno/tirreno-php-tracker",
+    "description": "PHP client for tirreno tracking",
+    "type": "library",
+    "keywords": [
+        "tirreno",
+        "fraud-detection",
+        "audit-trail",
+        "analytics",
+        "monitoring",
+        "bot-detection",
+        "antispam",
+        "application-monitoring"
+    ],
+    "license": "BSD-3-Clause",
+    "homepage": "https://www.tirreno.com",
+    "authors": [
+        {
+            "name": "tirreno technologies sàrl",
+            "email": "team@tirreno.com",
+            "homepage": "https://www.tirreno.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/tirrenotechnologies/tirreno-php-tracker/issues",
+        "source": "https://github.com/tirrenotechnologies/tirreno-php-tracker"
+    },
+    "require": {
+        "php": ">=7.4",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "classmap": ["."]
+    }
+}
