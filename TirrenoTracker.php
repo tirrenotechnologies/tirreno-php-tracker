@@ -1,7 +1,7 @@
 <?php
 
 /**
- * tirreno ~ open-source security platform
+ * tirreno ~ Open source user analytics
  * Copyright (c) tirreno technologies sàrl (https://www.tirreno.com)
  *
  * @copyright     Copyright (c) tirreno technologies sàrl (https://www.tirreno.com)
@@ -10,7 +10,7 @@
  */
 
 /**
- * Send user data from your web app or site to tirreno.
+ * TirrenoTracker implements the tirreno tracking API.
  *
  * For more information, see: https://github.com/tirrenotechnologies/tirreno-php-tracker/
  */
@@ -37,6 +37,8 @@ final class TirrenoTracker {
     private ?string $phoneNumber;
     private ?string $eventType;
     private ?string $httpCode;
+
+    private ?array $payload;
 
     private const LIST_OF_SERVER_IP_KEYS = [
         'HTTP_X_FORWARDED_FOR',
@@ -65,6 +67,7 @@ final class TirrenoTracker {
         'phoneNumber',
         'eventType',
         'httpCode',
+        'payload',
     ];
 
     public function __construct(string $apiUrl, string $apiKey) {
@@ -311,8 +314,18 @@ final class TirrenoTracker {
         return $this->httpCode;
     }
 
-    public function setHttpCode(int $httpCode): self {
+    public function setHttpCode(string|int $httpCode): self {
         $this->httpCode = (string) $httpCode;
+
+        return $this;
+    }
+
+    public function getPayload(): ?array {
+        return $this->payload;
+    }
+
+    public function setPayload(array $payload): self {
+        $this->payload  = $payload;
 
         return $this;
     }
