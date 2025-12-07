@@ -1,6 +1,6 @@
 # tirreno PHP tracker library
 
-Send user data from your web app or site to tirreno.
+Send data from your PHP application to tirreno console.
 
 ```php
 // Load object
@@ -13,7 +13,8 @@ $trackingId = "XXX";
 $tracker = new TirrenoTracker($tirrenoUrl, $trackingId);
 
 // Override defaults of required params
-$tracker->setUserName($currentUser->username);      // johndoe42
+$tracker->setUserName($currentUser->username)       // johndoe42
+        ->setEventTypeAccountLogin();
 
 // Set optional params
 $tracker->setFirstName($currentUser->firstname)     // John
@@ -45,5 +46,5 @@ require_once("TirrenoTracker.php");
 
 ## License
 
-Released under the [BSD License](https://opensource.org/license/bsd-3-clause). tirreno is a
-registered trademark of tirreno technologies sàrl, Switzerland.
+Released under the [BSD License](https://opensource.org/license/bsd-3-clause).
+tirreno is a registered trademark of tirreno technologies sàrl, Switzerland.

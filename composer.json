@@ -1,6 +1,6 @@
 {
     "name": "tirreno/tirreno-php-tracker",
-    "description": "PHP client for tirreno tracking",
+    "description": "PHP client for tirreno security analytics API",
     "type": "library",
     "keywords": [
         "tirreno",

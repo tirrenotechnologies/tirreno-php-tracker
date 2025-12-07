@@ -1,8 +1,8 @@
 <?php
 
 /**
- * tirreno ~ Open source user analytics
- * Copyright (c) tirreno technologies sàrl (https://www.tirreno.com)
+ * tirreno ~ open security analytics
+ * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
  *
  * @copyright     Copyright (c) tirreno technologies sàrl (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/bsd-3-clause BSD License
@@ -39,6 +39,7 @@ final class TirrenoTracker {
     private ?string $httpCode;
 
     private ?array $payload;
+    private ?array $fieldHistory;
 
     private const LIST_OF_SERVER_IP_KEYS = [
         'HTTP_X_FORWARDED_FOR',
@@ -68,6 +69,7 @@ final class TirrenoTracker {
         'eventType',
         'httpCode',
         'payload',
+        'fieldHistory'
     ];
 
     public function __construct(string $apiUrl, string $apiKey) {
@@ -80,12 +82,13 @@ final class TirrenoTracker {
     public function setDefaultEvent(): void {
         $this->ipAddress = $this->getIpAddress(true);
         $this->eventTime = $this->getEventTime(true);
-        $this->userName = $this->getUserName(true);
         $this->userAgent = $this->getUserAgent(true);
         $this->browserLanguage = $this->getBrowserLanguage(true);
         $this->httpMethod = $this->getHttpMethod(true);
         $this->httpReferer = $this->getHttpReferer(true);
         $this->url = $this->getUrl(true);
+
+        $this->setEventTypePageView();
 
         foreach (self::OPTIONAL_PROPERTIES as $prop) {
             $this->$prop = null;
@@ -94,6 +97,10 @@ final class TirrenoTracker {
 
     public function dump(): array {
         $data = [];
+
+        if (!isset($this->userName) && !isset($this->emailAddress)) {
+            $this->userName = $this->getUserName(true);
+        }
 
         foreach (self::DEFAULT_PROPERTIES as $prop) {
             $data[$prop] = $this->$prop;
@@ -330,6 +337,36 @@ final class TirrenoTracker {
         return $this;
     }
 
+    public function addPayload(array $item): self {
+        if (!isset($this->payload)) {
+            $this->payload = [];
+        }
+
+        $this->payload[] = $item;
+
+        return $this;
+    }
+
+    public function getFieldHistory(): ?array {
+        return $this->fieldHistory;
+    }
+
+    public function setFieldHistory(array $fieldHistory): self {
+        $this->fieldHistory  = $fieldHistory;
+
+        return $this;
+    }
+
+    public function addFieldHistory(array $item): self {
+        if (!isset($this->fieldHistory)) {
+            $this->fieldHistory = [];
+        }
+
+        $this->fieldHistory[] = $item;
+
+        return $this;
+    }
+
     private function maskIp(string $ip): string {
         if (strpos($ip, ':') !== false) {
             $parts = explode(':', $ip);
@@ -382,5 +419,83 @@ final class TirrenoTracker {
         }
 
         return '127.0.0.1';
+    }
+
+    public function setEventTypePageView(): self {
+        $this->eventType = 'page_view';
+
+        return $this;
+    }
+
+    public function setEventTypePageEdit(): self {
+        $this->eventType = 'page_edit';
+
+        return $this;
+    }
+
+    public function setEventTypePageDelete(): self {
+        $this->eventType = 'page_delete';
+
+        return $this;
+    }
+
+    public function setEventTypePageSearch(): self {
+        $this->eventType = 'page_search';
+
+        return $this;
+    }
+
+    public function setEventTypeAccountLogin(): self {
+        $this->eventType = 'account_login';
+
+        return $this;
+    }
+
+    public function setEventTypeAccountLogout(): self {
+        $this->eventType = 'account_logout';
+
+        return $this;
+    }
+
+    public function setEventTypeAccountLoginFail(): self {
+        $this->eventType = 'account_login_fail';
+
+        return $this;
+    }
+
+    public function setEventTypeAccountRegistration(): self {
+        $this->eventType = 'account_registration';
+
+        return $this;
+    }
+
+    public function setEventTypeAccountEmailChange(): self {
+        $this->eventType = 'account_email_change';
+
+        return $this;
+    }
+
+    public function setEventTypeAccountPasswordChange(): self {
+        $this->eventType = 'account_password_change';
+
+        return $this;
+    }
+
+    public function setEventTypeAccountEdit(): self {
+        $this->eventType = 'account_edit';
+
+        return $this;
+    }
+
+    public function setEventTypePageError(): self {
+        $this->eventType = 'page_error';
+
+        return $this;
+    }
+
+    public function setEventTypeFieldEdit(): self {
+        $this->eventType = 'field_edit';
+
+        return $this;
     }
 }
