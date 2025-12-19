@@ -3,6 +3,8 @@
 Send data from your PHP application to tirreno console.
 
 ```php
+<?php
+
 // Load object
 require_once("TirrenoTracker.php");
 
@@ -13,16 +15,19 @@ $trackingId = "XXX";
 $tracker = new TirrenoTracker($tirrenoUrl, $trackingId);
 
 // Override defaults of required params
-$tracker->setUserName($currentUser->username)       // johndoe42
+$tracker->setUserName("johndoe42")
+        ->setIpAddress("1.1.1.1")
+        ->setUrl("/login")
+        ->setUserAgent("Mozilla/5.0 (X11; Linux x86_64)")
         ->setEventTypeAccountLogin();
 
 // Set optional params
-$tracker->setFirstName($currentUser->firstname)     // John
-        ->setLastName($currentUser->lastname)       // Doe
-        ->setEmailAddress($currentUser->email);     // user@email.com
+$tracker->setFirstName("John")
+        ->setBrowserLanguage("fr-FR,fr;q=0.9")
+        ->setHttpMethod("POST");
 
 // Track event
-$tracker->sendEvent();
+$tracker->track();
 ```
 
 ## Requirements

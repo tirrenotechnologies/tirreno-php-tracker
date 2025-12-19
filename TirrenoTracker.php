@@ -115,7 +115,7 @@ final class TirrenoTracker {
         return $data;
     }
 
-    public function sendEvent(): void {
+    public function track(): void {
         if (function_exists('curl_init')) {
             $headers = [
                 'Api-Key: ' . $this->apiKey,
