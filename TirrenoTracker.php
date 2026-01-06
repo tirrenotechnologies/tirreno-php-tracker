@@ -390,8 +390,10 @@ final class TirrenoTracker {
     }
 
     private function trackingUrl(string $url): string {
-        if (strpos($url, '/sensor/') === false) {
-            $url = rtrim($url, '/') . '/sensor/';
+        $url = str_ends_with($url, '/') ? $url : $url . '/';
+
+        if (!str_ends_with($url, '/sensor/')) {
+            $url .= 'sensor/';
         }
 
         return $url;

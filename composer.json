@@ -1,5 +1,5 @@
 {
-    "name": "tirreno/tirreno-php-tracker",
+    "name": "tirreno/tirreno-tracker",
     "description": "PHP client for tirreno security analytics API",
     "type": "library",
     "keywords": [
@@ -31,5 +31,11 @@
     },
     "autoload": {
         "classmap": ["."]
+    },
+    "replace": {
+        "tirreno/tirreno-php-tracker": "self.version"
+    },
+    "provide": {
+        "tirreno/tirreno-php-tracker": "self.version"
     }
 }
