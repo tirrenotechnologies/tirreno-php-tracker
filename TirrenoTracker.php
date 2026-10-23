@@ -1,10 +1,10 @@
 <?php
 
 /**
- * tirreno ~ open security analytics
+ * tirreno ~ security framework
  * Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
  *
- * @copyright     Copyright (c) tirreno technologies sàrl (https://www.tirreno.com)
+ * @copyright     Copyright (c) Tirreno Technologies Sàrl (https://www.tirreno.com)
  * @license       https://opensource.org/licenses/bsd-3-clause BSD License
  * @link          https://www.tirreno.com tirreno(tm)
  */
@@ -73,7 +73,7 @@ final class TirrenoTracker {
     ];
 
     public function __construct(string $apiUrl, string $apiKey) {
-        $this->apiUrl = $this->trackingUrl($apiUrl);
+        $this->apiUrl = trim($apiUrl);
         $this->apiKey = $apiKey;
 
         $this->setDefaultEvent();
@@ -387,16 +387,6 @@ final class TirrenoTracker {
 
     private function isIp(string $ip): bool {
         return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) || filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
-    }
-
-    private function trackingUrl(string $url): string {
-        $url = str_ends_with($url, '/') ? $url : $url . '/';
-
-        if (!str_ends_with($url, '/sensor/')) {
-            $url .= 'sensor/';
-        }
-
-        return $url;
     }
 
     private function getRequestIp(): string {

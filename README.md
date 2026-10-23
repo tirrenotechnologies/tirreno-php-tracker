@@ -1,6 +1,6 @@
 # tirreno PHP tracker library
 
-This is the official PHP implementation of the [tirreno Tracking API](https://docs.tirreno.com/api-integration.html).
+This is the official PHP implementation of the [tirreno Tracking API](https://www.tirreno.com/devs/).
 
 ```php
 <?php
@@ -52,4 +52,4 @@ require_once("TirrenoTracker.php");
 ## License
 
 Released under the [BSD License](https://opensource.org/license/bsd-3-clause).
-tirreno is a registered trademark of tirreno technologies sàrl, Switzerland.
+tirreno is a registered trademark of Tirreno Technologies Sàrl, Switzerland.
